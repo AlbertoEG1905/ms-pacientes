@@ -43,8 +43,10 @@ public class PacienteServiceImpl implements PacienteService{
 
     @Override
     public Paciente save(Paciente paciente) {
-        Optional<Paciente> pacienteExistente = repository.findById(paciente.getId());
-        if(pacienteExistente.isPresent()){
+        if(paciente.getId()==null){
+            return repository.save(paciente);
+        }else{
+            Optional<Paciente> pacienteExistente = repository.findById(paciente.getId());
             pacienteExistente.get().setPNombre(paciente.getPNombre());
             pacienteExistente.get().setSNombre(paciente.getSNombre());
             pacienteExistente.get().setAPaterno(paciente.getAPaterno());
@@ -58,8 +60,6 @@ public class PacienteServiceImpl implements PacienteService{
             pacienteExistente.get().setDomicilio(paciente.getDomicilio());
             pacienteExistente.get().setCodigoPostal(paciente.getCodigoPostal());
             return repository.save(pacienteExistente.get());
-        }else{
-            return repository.save(paciente);
         }
     }
 }
