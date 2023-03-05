@@ -1,2 +1,2 @@
 # ms-pacientes
-MicroservicioPacientes
+Microservicio Pacientes
